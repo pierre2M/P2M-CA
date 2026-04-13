@@ -1,0 +1,51 @@
+GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3, 19 November 2007
+
+Copyright (C) 2026 Pierre Musseau-Milesi
+
+=======================================================================
+
+S'APPLIQUE À : tous les fichiers de code source .py et .js
+               de ce dépôt.
+
+Toute utilisation commerciale est interdite sans autorisation
+préalable et écrite de l'auteur :
+→ [à compléter : email ou lien de contact]
+
+=======================================================================
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+Additional restriction (permitted under AGPLv3 section 7):
+Commercial use of this software, in whole or in part, is prohibited
+without prior written permission from the copyright holder.
+
+You should have received a copy of the GNU Affero General Public
+License along with this program. If not, see:
+https://www.gnu.org/licenses/agpl-3.0.html
+
+=======================================================================
+
+EN-TÊTE À INCLURE DANS TOUT FICHIER SOURCE :
+
+    P2M-CA — Registre relationnel pour les communs
+    Copyright (C) 2026 Pierre Musseau-Milesi
+
+    Ce programme est un logiciel libre distribué sous licence
+    GNU Affero General Public License v3.0 (AGPL-3.0).
+    Toute utilisation commerciale est interdite sans autorisation
+    écrite de l'auteur.
+    Voir : https://www.gnu.org/licenses/agpl-3.0.html
+
+=======================================================================
+
+Texte complet de la licence AGPL-3.0 :
+https://www.gnu.org/licenses/agpl-3.0.html
