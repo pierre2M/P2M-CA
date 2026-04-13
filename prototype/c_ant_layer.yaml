@@ -1,0 +1,161 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Définition de la couche C-ANT
+# Sociologie de la traduction — Callon (1986)
+#
+# C-ANT est la couche mère dont héritent C-SOG et C-CONSENTEMENT.
+# Elle opérationalise les quatre étapes de la traduction et encode
+# les effets de performation du registre.
+#
+# Usage : python3 create_layer.py c_ant_layer.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+slug: "C-ANT"
+label: "Sociologie de la traduction (ANT)"
+description: >
+  Couche mere du registre P2M-CA. Operationalise les quatre etapes
+  de la traduction (Callon, 1986) : problematisation, interessement,
+  enrolement, mobilisation. Encode les effets de performation du registre
+  et les operations de porte-parole. Couche mere pour C-SOG et C-CONSENTEMENT.
+
+# L'auteur est l'acteur qui a concu cette couche.
+# Remplace par ton propre slug si tu l'as cree dans la base.
+auteur_slug: null
+
+# C-ANT n'a pas de couche parente — c'est la couche racine.
+couches_parentes: []
+
+# ── Champs spécifiques introduits par C-ANT ───────────────────────────────
+champs_definis:
+
+  phase_traduction:
+    type: "enum"
+    valeurs:
+      - PROBLEMATISATION
+      - INTERESSEMENT
+      - ENROLEMENT
+      - MOBILISATION
+      - DISSIDENCE
+      - CONTROVERSE
+      - BOITE_NOIRE
+      - CLOTURE
+    description: >
+      Etape du processus de traduction dans laquelle s'inscrit cette ecriture.
+      Obligatoire pour toute ecriture C-ANT.
+
+  ppo_uri:
+    type: "URI/null"
+    description: >
+      Point de passage obligatoire (PPO) defini ou mobilise dans cette interaction.
+      URI d'un acteur du registre designé comme noeud incontournable du reseau.
+
+  dispositif_interessement_uri:
+    type: "URI/null"
+    description: >
+      Objet, instrument ou arrangement technique servant d'intermediaire
+      dans une phase d'interessement. URI d'un acteur du registre.
+
+  identite_cible:
+    type: "markdown"
+    description: >
+      Description de l'identite que le traducteur cherche a stabiliser
+      chez l'acteur concerne a ce stade du processus.
+
+  acteurs_exclus:
+    type: "liste URI"
+    description: >
+      Acteurs ou influences que le dispositif d'interessement vise a ecarter
+      du reseau en cours de construction.
+
+  role_negocie:
+    type: "markdown"
+    description: >
+      Rolle accepte provisoirement par l'acteur dans le reseau,
+      a l'issue d'une negotiation d'enrolement.
+
+  modalite_negotiation:
+    type: "enum"
+    valeurs:
+      - NEGOCIATION
+      - COUP_DE_FORCE
+      - PERSUASION
+      - CONVENTION_TACITE
+    description: >
+      Modalite par laquelle l'enrolement a ete obtenu.
+
+  porte_parole_uri:
+    type: "URI/null"
+    description: >
+      URI de l'acteur designe comme representant d'un groupe ou d'un
+      non-humain dans la phase de mobilisation.
+
+  auteur_effectif_uri:
+    type: "URI/null"
+    description: >
+      Acteur ayant redige cette ecriture au nom d'un autre acteur.
+      Permet d'encoder les ecritures de porte-parole (ex. : chercheur
+      ecrivant au nom des coquilles Saint-Jacques).
+      Repond a la tension entre R1 (symetrie) et l'asymetrie des
+      porte-parole. Herite par C-SOG.
+
+  representativite_contestee:
+    type: "booleen"
+    description: >
+      Vrai si la representativite du porte-parole est ou pourrait etre
+      contestee par d'autres acteurs du reseau.
+
+  etat_identitaire:
+    type: "markdown"
+    description: >
+      Description de l'identite de l'acteur a ce stade du processus
+      de traduction. Permet de tracer les transformations d'identite
+      entre deux interactions.
+
+  convention_de_quantification:
+    type: "markdown"
+    description: >
+      Presupposes de l'ecriture : ce que le dispositif rend visible
+      et ce qu'il exclut. Obligatoire pour toute ecriture de type
+      VALUEMETER (herite par C-SOG). Documente les effets de veridiction
+      et de valorisation du registre (Chiapello & Gilbert, 2016).
+
+  solidite_de_l_enonce:
+    type: "enum"
+    valeurs:
+      - CONTROVERSE
+      - PROVISOIRE
+      - STABILISE
+      - BOITE_NOIRE
+      - IRREVERSIBLE
+    description: >
+      Graduation de la solidite de l'enonce encode dans cette ecriture.
+      BOITE_NOIRE : enonce traite comme fait stabilise dans le reseau.
+      IRREVERSIBLE : evenement non annulable (extinction, etc.) — R1
+      peut etre suspendue par convention dans C-SOLIDITE.
+
+  acteurs_en_opposition:
+    type: "liste URI"
+    description: >
+      Acteurs contestant activement l'enonce dans une interaction
+      de controverse. Permet de tracer les dissidences.
+
+  type_controinscription:
+    type: "enum"
+    valeurs:
+      - REFUTATION
+      - CONTRE_EXPERIENCE
+      - REQUALIFICATION
+      - MOBILISATION_ALTERNATIVE
+    description: >
+      Nature de la contre-inscription produite par un acteur dissident.
+
+  sous_type_acteur_ant:
+    type: "enum"
+    valeurs:
+      - TRADUCTEUR
+      - PORTE_PAROLE
+      - ACTANT_NON_HUMAIN
+      - INTERMEDIAIRE
+      - COLLECTEUR
+    description: >
+      Role fonctionnel de l'acteur dans le reseau socio-technique,
+      au sens de la sociologie de la traduction.

@@ -1,0 +1,138 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Définition de la couche C-SOG
+# Sociologie des Outils de Gestion — Chiapello & Gilbert (2016)
+# + Valuemeters — Callon, Caliskan & MacKenzie (2025)
+#
+# C-SOG hérite de C-ANT. Elle analyse la manière dont tout outil de gestion
+# enregistré dans un registre P2M-CA exerce des fonctions épistémiques,
+# pragmatiques et politiques. Elle opérationalise les valuemeters comme
+# instruments de qualcul.
+#
+# Usage : python3 create_layer.py c_sog_layer.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+slug: "C-SOG"
+label: "Sociologie des outils de gestion"
+description: >
+  Couche fille de C-ANT. Fondee sur Chiapello & Gilbert (2016) et
+  Callon et al. (2025). Analyse les fonctions epistemiques, pragmatiques
+  et politiques des outils de gestion enregistres dans le registre.
+  Operationalise les valuemeters comme instruments de qualcul :
+  instruments qui, simultanement, qualifient et calculent.
+  Trois sous-registres de valuation : BIOPHYSIQUE, MONETAIRE, CARE.
+
+auteur_slug: null
+
+couches_parentes:
+  - "C-ANT"
+
+champs_definis:
+
+  convention_de_quantification:
+    type: "markdown"
+    description: >
+      Presupposes de l'ecriture : ce que le dispositif rend visible
+      et ce qu'il exclut. Obligatoire pour toute ecriture dont
+      sous_type_outil = VALUEMETER. Herite et etend le champ
+      homonyme de C-ANT.
+
+  registre_valuation:
+    type: "enum"
+    valeurs:
+      - BIOPHYSIQUE
+      - MONETAIRE
+      - CARE
+      - HYBRIDE
+    description: >
+      Nature du valuemeter mobilise dans cette ecriture.
+      BIOPHYSIQUE : indices ecologiques, biomasse, taux de sequestration.
+      MONETAIRE : couts de restauration, valeur des eco-services.
+      CARE : heures de travail benevole, concessions foncières,
+             travail domestique non remunere.
+      HYBRIDE : combinaison de plusieurs registres.
+
+  fonction_outil:
+    type: "enum"
+    valeurs:
+      - EPISTEMIQUE
+      - PRAGMATIQUE
+      - POLITIQUE
+    description: >
+      Fonction principale exercee par l'outil de gestion dans
+      cette interaction, au sens de Chiapello & Gilbert (2016).
+      EPISTEMIQUE : l'outil produit des verites (veridiction)
+                   et attribue de la valeur (valorisation).
+      PRAGMATIQUE : l'outil structure l'action et declenche
+                   des distributions de biens sociaux.
+      POLITIQUE   : l'outil reifie des representations et
+                   legitime des asymetries sociales.
+
+  effet_premier_ordre:
+    type: "enum"
+    valeurs:
+      - VERIDICTION
+      - VALORISATION
+      - STRUCTURATION
+      - SELECTION
+      - REIFICATION
+      - LEGITIMATION
+    description: >
+      Effet propre produit par l'outil de gestion dans cette
+      interaction. Un outil peut produire plusieurs effets ;
+      indiquer l'effet dominant.
+
+  effet_reactivite:
+    type: "markdown"
+    description: >
+      Effets de second ordre observes ou anticipes : subjectivation
+      (les acteurs se faconnent a l'image des evaluations),
+      performativite (l'outil transforme le monde pour qu'il
+      corresponde a ses categories), contournement, detournement,
+      isomorphisme institutionnel, domination, confrontation.
+
+  sous_type_outil:
+    type: "enum"
+    valeurs:
+      - VALUEMETER
+      - PROCEDURE
+      - SYSTEME_INFO
+      - SCRIPT
+      - METROLOGIE
+      - CLASSEMENT
+    description: >
+      Type fonctionnel de l'outil de gestion encode dans
+      cette ecriture.
+
+  auteur_effectif_uri:
+    type: "URI/null"
+    description: >
+      Acteur ayant redige l'ecriture au nom d'un autre acteur
+      (porte-parole). Herite du champ homonyme de C-ANT.
+      Utile pour les ecritures encodant la valeur d'un
+      acteur non-humain (zone humide, espece, ecosysteme).
+
+  unite_mesure:
+    type: "string"
+    description: >
+      Unite de mesure du valuemeter mobilise dans cette ecriture.
+      Exemples : tCO2eq, ha, h/an, EUR, indice SEEA-EA, nb_especes.
+
+  valeur_quantitative:
+    type: "number/null"
+    description: >
+      Valeur numerique associee a l'ecriture, si applicable.
+      A combiner avec unite_mesure. Null si la valuation
+      est qualitative ou narrative.
+
+  periode_reference:
+    type: "string/null"
+    description: >
+      Periode de reference de la mesure (ex. : 2026, 2020-2025,
+      annuel). Null si non applicable.
+
+  source_donnees:
+    type: "markdown/null"
+    description: >
+      Source des donnees mobilisees par le valuemeter :
+      organisme producteur, protocole de mesure, date de collecte.
+      Complementaire a convention_de_quantification.

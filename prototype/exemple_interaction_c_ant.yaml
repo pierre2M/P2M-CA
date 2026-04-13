@@ -1,0 +1,121 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Exemple d'interaction avec la couche C-ANT
+# Encode l'étape de problématisation de l'étude des coquilles Saint-Jacques
+# (Callon, 1986) — à titre d'illustration du modèle.
+#
+# Usage : python3 create_interaction.py exemple_interaction_c_ant.yaml
+#
+# Acteurs à créer avant de lancer ce fichier :
+#   python3 create_actor_ollama.py "Chercheurs CNEXO"
+#   python3 create_actor_ollama.py "Coquilles Saint-Jacques"
+#   python3 create_actor_ollama.py "Pecheurs de Saint-Brieuc"
+# ─────────────────────────────────────────────────────────────────────────────
+
+slug: "problematisation-baie-saint-brieuc-1974"
+
+couches:
+  - "C-ANT"
+
+ecritures:
+
+  # ── Chercheurs CNEXO : ce qu'ils mobilisent (DEBIT) ──────────────────────
+  - acteur_slug: "chercheurs-cnexo"
+    sens: "DEBIT"
+    couche: "C-ANT"
+    contenu: |
+      Les chercheurs mobilisent la capacite des coquilles a se fixer
+      sur des collecteurs artificiels comme objet d'etude scientifique.
+      PPO : tout acteur desirant sauvegarder les stocks doit passer
+      par leur programme de recherche.
+    champs_couche:
+      phase_traduction: "PROBLEMATISATION"
+      ppo_uri: "programme-collecteurs-cnexo"
+      identite_cible: >
+        Les chercheurs se positionnent comme intermediaires indispensables
+        entre les coquilles, les pecheurs et la survie des stocks.
+      sous_type_acteur_ant: "TRADUCTEUR"
+      convention_de_quantification: >
+        La capacite de fixation des larves est mesuree par taux d'adhesion
+        sur collecteurs experimentaux. Exclut les variables hydrologiques
+        non controlees et les savoirs empiriques des pecheurs.
+      solidite_de_l_enonce: "PROVISOIRE"
+
+  # ── Chercheurs CNEXO : ce qu'ils font ou doivent (CREDIT) ────────────────
+  - acteur_slug: "chercheurs-cnexo"
+    sens: "CREDIT"
+    couche: "C-ANT"
+    contenu: |
+      Les chercheurs s'engagent a produire un programme de repeuplement
+      viable si les coquilles confirment leur capacite de fixation.
+    champs_couche:
+      phase_traduction: "PROBLEMATISATION"
+      solidite_de_l_enonce: "PROVISOIRE"
+
+  # ── Coquilles Saint-Jacques : ecriture de porte-parole (DEBIT) ───────────
+  - acteur_slug: "coquilles-saint-jacques"
+    sens: "DEBIT"
+    couche: "C-ANT"
+    contenu: |
+      [Ecriture au nom des coquilles, par les chercheurs CNEXO]
+      Les larves ont la capacite de se fixer sur des collecteurs
+      artificiels si les conditions hydrodynamiques sont reunies
+      et si les predateurs sont ecartes.
+    champs_couche:
+      phase_traduction: "PROBLEMATISATION"
+      auteur_effectif_uri: "chercheurs-cnexo"
+      porte_parole_uri: "chercheurs-cnexo"
+      representativite_contestee: true
+      sous_type_acteur_ant: "ACTANT_NON_HUMAIN"
+      acteurs_exclus:
+        - "etoiles-de-mer"
+        - "courants-marins-perturbateurs"
+      solidite_de_l_enonce: "CONTROVERSE"
+      convention_de_quantification: >
+        La capacite de fixation est inferee de donnees experimentales
+        preliminaires sur 3 sites. La representativite de ces sites
+        pour l'ensemble de la baie reste a etablir.
+
+  # ── Coquilles Saint-Jacques : ecriture de porte-parole (CREDIT) ──────────
+  - acteur_slug: "coquilles-saint-jacques"
+    sens: "CREDIT"
+    couche: "C-ANT"
+    contenu: |
+      [Ecriture au nom des coquilles, par les chercheurs CNEXO]
+      Les coquilles dependent du programme de recherche CNEXO
+      pour leur survie a long terme dans la baie.
+    champs_couche:
+      phase_traduction: "PROBLEMATISATION"
+      auteur_effectif_uri: "chercheurs-cnexo"
+      representativite_contestee: true
+      sous_type_acteur_ant: "ACTANT_NON_HUMAIN"
+      solidite_de_l_enonce: "CONTROVERSE"
+
+  # ── Pecheurs : enrolement provisoire (DEBIT) ─────────────────────────────
+  - acteur_slug: "pecheurs-de-saint-brieuc"
+    sens: "DEBIT"
+    couche: "C-ANT"
+    contenu: |
+      Les pecheurs mobilisent leur connaissance empirique de la baie
+      et leur interet economique a la survie des stocks.
+    champs_couche:
+      phase_traduction: "ENROLEMENT"
+      sous_type_acteur_ant: "INTERMEDIAIRE"
+      solidite_de_l_enonce: "PROVISOIRE"
+
+  # ── Pecheurs : role accepte provisoirement (CREDIT) ──────────────────────
+  - acteur_slug: "pecheurs-de-saint-brieuc"
+    sens: "CREDIT"
+    couche: "C-ANT"
+    contenu: |
+      Les pecheurs acceptent provisoirement que le probleme du declin
+      des stocks necessite une etude scientifique du comportement
+      larvaire avant tout changement de pratiques.
+    champs_couche:
+      phase_traduction: "ENROLEMENT"
+      role_negocie: "Partenaires observateurs du programme de repeuplement"
+      modalite_negotiation: "CONVENTION_TACITE"
+      solidite_de_l_enonce: "PROVISOIRE"
+
+# Pas de validation requise pour cet exemple —
+# interaction enregistree directement (usage analytique, pas de gouvernance).
+validations_requises: []

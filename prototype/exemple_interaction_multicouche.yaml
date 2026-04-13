@@ -1,0 +1,317 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Exemple d'interaction multicouchée — P2M-CA v2
+# Restauration d'une zone humide : C-ANT + C-SOG + C-CONSENTEMENT + C-SOLIDITE
+#
+# Cet exemple illustre la superposition de quatre couches sur la même
+# interaction. Chaque couche produit ses propres écritures sur les mêmes
+# acteurs, sans hiérarchie imposée entre elles.
+#
+# Acteurs à créer avant de lancer ce fichier :
+#   python3 create_actor_ollama.py "Zone humide de Brière"
+#   python3 create_actor_ollama.py "Association naturaliste Loire"
+#   python3 create_actor_claude.py "Syndicat mixte du bassin versant"
+#
+# Couches à enregistrer avant :
+#   python3 create_layer.py c_ant_layer.yaml
+#   python3 create_layer.py c_sog_layer.yaml
+#   python3 create_layer.py c_consentement_layer.yaml
+#   python3 create_layer.py c_solidite_layer.yaml
+#
+# Usage : python3 create_interaction.py exemple_interaction_multicouche.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+slug: "restauration-zh-briere-multicouche-2026-3"
+
+couches:
+  - "C-ANT"
+  - "C-SOG"
+  - "C-CONSENTEMENT"
+  - "C-SOLIDITE"
+
+ecritures:
+
+  # ════════════════════════════════════════════════════════════════════════
+  # ZONE HUMIDE — actant non-humain
+  # ════════════════════════════════════════════════════════════════════════
+
+  # ── C-ANT : enrolement de la zone humide ─────────────────────────────
+  - acteur_slug: "zone-humide-de-briere"
+    sens: "DEBIT"
+    couche: "C-ANT"
+    contenu: |
+      [Ecriture au nom de la zone humide, par l'association naturaliste]
+      La zone humide mobilise 850 ha, 3 nappes phreatiques et
+      23 especes d'oiseaux migrateurs dependant de ses fonctions
+      ecosystemiques.
+    champs_couche:
+      phase_traduction: "ENROLEMENT"
+      auteur_effectif_uri: "association-naturaliste-loire"
+      porte_parole_uri: "association-naturaliste-loire"
+      representativite_contestee: false
+      sous_type_acteur_ant: "ACTANT_NON_HUMAIN"
+      role_negocie: >
+        Asset-actif central du programme de restauration :
+        la zone humide accepte le role de beneficiaire et
+        de productrice de services ecosystemiques mesures.
+      solidite_de_l_enonce: "PROVISOIRE"
+
+  - acteur_slug: "zone-humide-de-briere"
+    sens: "CREDIT"
+    couche: "C-ANT"
+    contenu: |
+      [Ecriture au nom de la zone humide, par l'association naturaliste]
+      La zone humide depend du programme de restauration pour
+      maintenir son agentivite ecologique face au drainage agricole
+      et a l'urbanisation du bassin versant.
+    champs_couche:
+      phase_traduction: "ENROLEMENT"
+      auteur_effectif_uri: "association-naturaliste-loire"
+      representativite_contestee: false
+      sous_type_acteur_ant: "ACTANT_NON_HUMAIN"
+      solidite_de_l_enonce: "PROVISOIRE"
+
+  # ── C-SOG/biophysique : valuemeter ecologique ────────────────────────
+  - acteur_slug: "zone-humide-de-briere"
+    sens: "DEBIT"
+    couche: "C-SOG"
+    contenu: |
+      Restauration de 14 ha en prairie humide.
+      Biodiversite : +0,8 points indice SEEA-EA.
+      23 especes d'oiseaux migrateurs dependants.
+    champs_couche:
+      registre_valuation: "BIOPHYSIQUE"
+      sous_type_outil: "VALUEMETER"
+      fonction_outil: "EPISTEMIQUE"
+      effet_premier_ordre: "VERIDICTION"
+      unite_mesure: "ha / indice SEEA-EA"
+      valeur_quantitative: 14
+      periode_reference: "2026-2031"
+      convention_de_quantification: >
+        Indice SEEA-EA version 2021. Perimetre : flore vasculaire
+        et avifaune nicheuse. Exclus : insectes pollinisateurs,
+        macroinvertebres aquatiques, champignons.
+        Mesure sur 3 placettes representatives de 0,5 ha chacune.
+      source_donnees: >
+        Conservatoire botanique national de Brest, protocole
+        STOC-EPS, releves avril 2026.
+      effet_reactivite: >
+        Risque de subjectivation : les gestionnaires pourraient
+        optimiser les pratiques pour maximiser l'indice SEEA-EA
+        au detriment des especes non mesurees (insectes).
+
+  - acteur_slug: "zone-humide-de-briere"
+    sens: "CREDIT"
+    couche: "C-SOG"
+    contenu: |
+      Sequestration : 180 tCO2eq sur 5 ans.
+      Regulation hydrique pour 35 000 habitants aval.
+      Recharge de 3 nappes phreatiques.
+    champs_couche:
+      registre_valuation: "BIOPHYSIQUE"
+      sous_type_outil: "VALUEMETER"
+      fonction_outil: "EPISTEMIQUE"
+      effet_premier_ordre: "VALORISATION"
+      unite_mesure: "tCO2eq / nb_habitants"
+      valeur_quantitative: 180
+      periode_reference: "2026-2031"
+      convention_de_quantification: >
+        Sequestration mesuree par difference de stock de carbone
+        sol (methode IPCC Tier 2). Regulation hydrique estimee
+        par modelisation hydraulique (HEC-RAS). Perimetre :
+        bassin versant aval sur 12 km.
+
+  # ── C-SOG/care : valuemeter de soin ──────────────────────────────────
+  - acteur_slug: "zone-humide-de-briere"
+    sens: "DEBIT"
+    couche: "C-SOG"
+    contenu: |
+      La zone mobilise 1 200 h/an de travail benevole
+      et 12 000 EUR de financement europeen LIFE.
+    champs_couche:
+      registre_valuation: "CARE"
+      sous_type_outil: "VALUEMETER"
+      fonction_outil: "PRAGMATIQUE"
+      effet_premier_ordre: "STRUCTURATION"
+      unite_mesure: "h/an + EUR"
+      valeur_quantitative: 1200
+      periode_reference: "2026"
+      convention_de_quantification: >
+        Heures de benevole non converties en euros.
+        Aucune convention d'equivalence monetaire retenue
+        (voir C-CONSENTEMENT pour la negociation d'equivalence).
+        Financement LIFE-Nature programme 2024-2029.
+
+  # ── C-SOLIDITE : etat de l'enonce de restauration ────────────────────
+  - acteur_slug: "zone-humide-de-briere"
+    sens: "DEBIT"
+    couche: "C-SOLIDITE"
+    contenu: |
+      L'etat de degradation anterieur de la zone est archive.
+      Le programme de restauration est en cours — enonce provisoire.
+    champs_couche:
+      solidite_enonce: "PROVISOIRE"
+      seuil_non_retour: false
+      r1_suspendue: false
+      indicateur_vitalite: >
+        Indice SEEA-EA actuel : 2,1/10 (etat degrade).
+        Cible 2031 : 4,5/10. Taux d'hygrophytes : 18% (cible : 55%).
+      archive_etat_anterieur_uri: null
+      source_evaluation: >
+        Diagnostic ecologique BIOTOPE, mars 2026.
+
+  # ════════════════════════════════════════════════════════════════════════
+  # ASSOCIATION NATURALISTE — porteur du programme de care
+  # ════════════════════════════════════════════════════════════════════════
+
+  # ── C-ANT : mobilisation ──────────────────────────────────────────────
+  - acteur_slug: "association-naturaliste-loire"
+    sens: "DEBIT"
+    couche: "C-ANT"
+    contenu: |
+      L'association mobilise son expertise naturaliste, son reseau
+      de benevoles et sa legitimite aupres des institutions locales
+      pour porter le programme de restauration.
+    champs_couche:
+      phase_traduction: "MOBILISATION"
+      sous_type_acteur_ant: "TRADUCTEUR"
+      porte_parole_uri: "association-naturaliste-loire"
+      solidite_de_l_enonce: "STABILISE"
+
+  - acteur_slug: "association-naturaliste-loire"
+    sens: "CREDIT"
+    couche: "C-ANT"
+    contenu: |
+      L'association s'engage a produire des donnees de suivi annuelles
+      et a soumettre ses methodes a co-validation externe.
+    champs_couche:
+      phase_traduction: "MOBILISATION"
+      sous_type_acteur_ant: "TRADUCTEUR"
+      solidite_de_l_enonce: "STABILISE"
+
+  # ── C-CONSENTEMENT : co-validation anti-greenwashing ─────────────────
+  - acteur_slug: "association-naturaliste-loire"
+    sens: "CREDIT"
+    couche: "C-CONSENTEMENT"
+    contenu: |
+      L'association accepte une co-validation externe de ses
+      ecritures de care par le Conservatoire d'espaces naturels
+      et l'Agence de l'eau Loire-Bretagne.
+    champs_couche:
+      statut_consentement: "CONSENTI"
+      type_deliberation: "CO_VALIDATION"
+      acteurs_co_validateurs:
+        - "syndicat-mixte-du-bassin-versant"
+      effet_politique: >
+        La co-validation reduit le risque de greenwashing en
+        imposant un regard externe sur les ecritures de care.
+        Elle renforce la legitimite du valuemeter CARE aupres
+        des financeurs institutionnels.
+
+  # ── C-CONSENTEMENT : negociation d'equivalence CARE/MONETAIRE ────────
+  - acteur_slug: "association-naturaliste-loire"
+    sens: "DEBIT"
+    couche: "C-CONSENTEMENT"
+    contenu: |
+      L'association propose une convention d'equivalence :
+      1h de benevole qualifie = 25 EUR (taux SMIC charges incluses).
+      Cette convention est soumise a deliberation.
+    champs_couche:
+      statut_consentement: "EN_NEGOCIATION"
+      type_deliberation: "NEGOCIATION_EQUIVALENCE"
+      convention_equivalence: >
+        Proposition : 1h benevole qualifie = 25 EUR/h
+        (reference : cout horaire charge SMIC 2026).
+        Contre-proposition du Syndicat mixte : 18 EUR/h
+        (reference : taux benevole associatif France Benevolat 2025).
+        Statut : en cours de negociation — non clos.
+      effet_politique: >
+        Le choix de la convention d'equivalence affecte directement
+        le poids politique du travail benevole dans le bilan
+        de l'interaction. Une valeur haute renforce la legitimite
+        du secteur associatif face aux acteurs institutionnels.
+
+  # ════════════════════════════════════════════════════════════════════════
+  # SYNDICAT MIXTE — gouvernance et validation
+  # ════════════════════════════════════════════════════════════════════════
+
+  # ── C-ANT : enrolement du Syndicat mixte ─────────────────────────────
+  - acteur_slug: "syndicat-mixte-du-bassin-versant"
+    sens: "DEBIT"
+    couche: "C-ANT"
+    contenu: |
+      Le Syndicat mixte mobilise ses droits de gestion sur la zone
+      et son pouvoir d'attribution des financements.
+    champs_couche:
+      phase_traduction: "ENROLEMENT"
+      sous_type_acteur_ant: "INTERMEDIAIRE"
+      role_negocie: >
+        Validateur institutionnel du programme et attributaire
+        des droits de gestion pour 20 ans.
+      modalite_negotiation: "NEGOCIATION"
+      solidite_de_l_enonce: "STABILISE"
+
+  - acteur_slug: "syndicat-mixte-du-bassin-versant"
+    sens: "CREDIT"
+    couche: "C-ANT"
+    contenu: |
+      Le Syndicat mixte s'engage a financer les couts de restauration
+      et a produire un rapport annuel de suivi accessible au public.
+    champs_couche:
+      phase_traduction: "ENROLEMENT"
+      solidite_de_l_enonce: "STABILISE"
+
+  # ── C-SOG/monetaire : valuemeter financier ────────────────────────────
+  - acteur_slug: "syndicat-mixte-du-bassin-versant"
+    sens: "DEBIT"
+    couche: "C-SOG"
+    contenu: |
+      Cout de restauration attribue au Syndicat mixte : 1 200 000 EUR
+      sur 5 ans (fonds FEDER + financement propre).
+    champs_couche:
+      registre_valuation: "MONETAIRE"
+      sous_type_outil: "VALUEMETER"
+      fonction_outil: "PRAGMATIQUE"
+      effet_premier_ordre: "SELECTION"
+      unite_mesure: "EUR"
+      valeur_quantitative: 1200000
+      periode_reference: "2026-2031"
+      convention_de_quantification: >
+        Couts directs de travaux de restauration (terrassement,
+        plantation, gestion hydraulique). Exclus : couts de
+        suivi ecologique, temps agent Syndicat, frais de portage.
+      source_donnees: >
+        Budget previsionnel Syndicat mixte, deliberation du
+        conseil syndical du 15/03/2026.
+      effet_reactivite: >
+        Risque d'isomorphisme : d'autres territoires pourraient
+        adopter ce budget comme norme de reference pour des
+        restaurations similaires, independamment du contexte local.
+
+  # ── C-CONSENTEMENT : validation formelle du Syndicat ─────────────────
+  - acteur_slug: "syndicat-mixte-du-bassin-versant"
+    sens: "CREDIT"
+    couche: "C-CONSENTEMENT"
+    contenu: |
+      Le Syndicat mixte valide formellement le programme de
+      restauration et les conventions de quantification associees.
+    champs_couche:
+      statut_consentement: "CONSENTI"
+      type_deliberation: "CO_VALIDATION"
+      effet_politique: >
+        La validation institutionnelle du Syndicat mixte confere
+        une legitimite politique au programme et a ses valuemeters,
+        au risque de clore prematurement des controverses encore
+        ouvertes (ex. : convention d'equivalence CARE/MONETAIRE).
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Validations requises
+# Le Syndicat mixte (agent Claude) a validation_humaine_requise = true
+# ─────────────────────────────────────────────────────────────────────────────
+
+validations_requises:
+  - acteur_slug: "syndicat-mixte-du-bassin-versant"
+    type: "HUMAIN"
+    couche: "C-CONSENTEMENT"
+    motif: >
+      Validation formelle du conseil syndical requise avant
+      enregistrement definitif du programme de restauration.

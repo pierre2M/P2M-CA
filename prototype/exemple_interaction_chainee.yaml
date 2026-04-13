@@ -1,0 +1,98 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Exemple d'interaction chaînée — dissidence des pêcheurs
+# Fait suite à : problematisation-baie-saint-brieuc-1974
+#
+# Illustre le chainage via ecriture_anterieure_uri :
+# les pêcheurs braconnent les parcs, contestant leur rôle d'observateurs
+# passifs défini dans l'interaction précédente.
+#
+# Acteurs nécessaires (déjà créés si tu as joué l'exemple C-ANT) :
+#   chercheurs-cnexo, coquilles-saint-jacques, pecheurs-de-saint-brieuc
+# ─────────────────────────────────────────────────────────────────────────────
+
+slug: "dissidence-pecheurs-braconnage-1975"
+
+couches:
+  - "C-ANT"
+  - "C-SOLIDITE"
+
+ecritures:
+
+  # ── Pêcheurs : dissidence — braconnage des parcs ──────────────────────
+  - acteur_slug: "pecheurs-de-saint-brieuc"
+    sens: "DEBIT"
+    couche: "C-ANT"
+    # Chainage vers l'enrolement accepte dans l'interaction precedente
+    ecriture_anterieure_uri: "problematisation-baie-saint-brieuc-1974"
+    contenu: |
+      Les pecheurs exercent leur droit de prelevement sur les coquilles
+      des parcs experimentaux, contournant le role d'observateurs passifs
+      qui leur avait ete assigne lors de la problematisation.
+    champs_couche:
+      phase_traduction: "DISSIDENCE"
+      type_controinscription: "REFUTATION"
+      solidite_de_l_enonce: "CONTROVERSE"
+      convention_de_quantification: >
+        Le braconnage invalide les donnees experimentales car les stocks
+        de larves mesures ne correspondent plus aux conditions controlees
+        definies par le protocole CNEXO.
+
+  - acteur_slug: "pecheurs-de-saint-brieuc"
+    sens: "CREDIT"
+    couche: "C-ANT"
+    ecriture_anterieure_uri: "problematisation-baie-saint-brieuc-1974"
+    contenu: |
+      Par ce braconnage, les pecheurs invalident les resultats
+      experimentaux et contestent la representativite des
+      porte-parole scientifiques du programme CNEXO.
+    champs_couche:
+      phase_traduction: "DISSIDENCE"
+      solidite_de_l_enonce: "CONTROVERSE"
+
+  # ── Chercheurs : enregistrement de la defection ───────────────────────
+  - acteur_slug: "chercheurs-cnexo"
+    sens: "DEBIT"
+    couche: "C-ANT"
+    ecriture_anterieure_uri: "problematisation-baie-saint-brieuc-1974"
+    contenu: |
+      Les chercheurs enregistrent la defection des pecheurs et sont
+      contraints de revoir leur modele de mobilisation des allies.
+      Le PPO (programme collecteurs) est fragilise.
+    champs_couche:
+      phase_traduction: "CONTROVERSE"
+      acteurs_en_opposition:
+        - "pecheurs-de-saint-brieuc"
+      solidite_de_l_enonce: "CONTROVERSE"
+      convention_de_quantification: >
+        Les donnees de fixation larvaire collectees avant le braconnage
+        restent valides ; les donnees posterieures sont invalidees.
+
+  - acteur_slug: "chercheurs-cnexo"
+    sens: "CREDIT"
+    couche: "C-ANT"
+    contenu: |
+      Les chercheurs doivent renforcer le dispositif d'interessement
+      pour stabiliser a nouveau le reseau socio-technique.
+    champs_couche:
+      phase_traduction: "CONTROVERSE"
+      solidite_de_l_enonce: "CONTROVERSE"
+
+  # ── Solidité : degradation de l'enonce ───────────────────────────────
+  - acteur_slug: "coquilles-saint-jacques"
+    sens: "DEBIT"
+    couche: "C-SOLIDITE"
+    ecriture_anterieure_uri: "problematisation-baie-saint-brieuc-1974"
+    contenu: |
+      L'etat experimental des parcs est compromis par le braconnage.
+      L'enonce sur la capacite de fixation des larves retombe en
+      statut CONTROVERSE.
+    champs_couche:
+      solidite_enonce: "CONTROVERSE"
+      seuil_non_retour: false
+      r1_suspendue: false
+      indicateur_vitalite: >
+        Stocks de larves : non mesurables apres braconnage.
+        Protocole experimental invalide sur 2 des 3 sites.
+      source_evaluation: "Rapport CNEXO, janvier 1975."
+
+validations_requises: []

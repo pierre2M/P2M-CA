@@ -1,0 +1,100 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Définition de la couche C-CONSENTEMENT
+# Délibération, politique et contestation
+#
+# C-CONSENTEMENT hérite de C-ANT. Elle encode toutes les opérations par
+# lesquelles les acteurs contestent, négocient ou renversent les vérités
+# et les valeurs produites par les outils de gestion. Elle constitue aussi
+# le mécanisme anti-greenwashing du registre via la co-validation.
+#
+# Usage : python3 create_layer.py c_consentement_layer.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+slug: "C-CONSENTEMENT"
+label: "Délibération, politique et contestation"
+description: >
+  Couche fille de C-ANT. Encode la dimension deliberative et politique
+  des programmes Callon et Chiapello & Gilbert (2016). Lieu d'encodage
+  de toutes les operations par lesquelles les acteurs contestent,
+  negocient ou renversent les verites et les valeurs produites par les
+  outils de gestion. Mecanisme anti-greenwashing via co-validation.
+
+auteur_slug: null
+
+couches_parentes:
+  - "C-ANT"
+
+champs_definis:
+
+  statut_consentement:
+    type: "enum"
+    valeurs:
+      - CONSENTI
+      - CONTRAINT
+      - INCONNU
+      - EN_NEGOCIATION
+    description: >
+      Qualification du consentement de l'acteur a l'interaction
+      et aux ecritures qui le concernent.
+      CONSENTI     : l'acteur a explicitement accepte.
+      CONTRAINT    : l'acteur subit l'interaction sans l'avoir choisie.
+      INCONNU      : le consentement n'a pas ete etabli.
+      EN_NEGOCIATION : le consentement est en cours de negociation.
+
+  type_deliberation:
+    type: "enum"
+    valeurs:
+      - NEGOCIATION_EQUIVALENCE
+      - CONTRO_VERIDICTION
+      - CONTRE_INSCRIPTION
+      - CO_VALIDATION
+    description: >
+      Nature de l'operation deliberative encodee dans cette ecriture.
+      NEGOCIATION_EQUIVALENCE : les acteurs negocient une convention
+        de conversion entre valuemeters (ex. : heures de benevole en EUR).
+      CONTRO_VERIDICTION : contestation d'une verite produite par un
+        outil de gestion (ex. : remise en cause d'un indice de biodiversite).
+      CONTRE_INSCRIPTION : nouvelle ecriture contestant le contenu
+        d'une ecriture anterieure. Le registre devient un palimpseste.
+      CO_VALIDATION : validation conjointe par plusieurs acteurs,
+        protocole anti-greenwashing.
+
+  acteurs_co_validateurs:
+    type: "liste URI"
+    description: >
+      Acteurs tiers requis pour valider une ecriture de care ou
+      de valuation (protocole anti-greenwashing). Au moins un
+      acteur tiers independant de l'auteur de l'ecriture.
+
+  contestation_convention:
+    type: "markdown"
+    description: >
+      Description d'une contestation des conventions de quantification
+      produites par un outil de gestion. Operationalise la construction
+      de centres de calcul concurrents (Chiapello & Gilbert, 2016).
+      A renseigner quand type_deliberation = CONTRO_VERIDICTION
+      ou CONTRE_INSCRIPTION.
+
+  convention_equivalence:
+    type: "markdown/null"
+    description: >
+      Convention de conversion retenue entre deux valuemeters
+      incommensurables (ex. : 1h de benevole = X EUR selon
+      la methode retenue). Cette convention est elle-meme une
+      ecriture datee, attribuee et contestable.
+      A renseigner quand type_deliberation = NEGOCIATION_EQUIVALENCE.
+
+  effet_politique:
+    type: "markdown"
+    description: >
+      Documentation des effets de domination, de legitimation
+      ou d'emancipation produits par l'interaction et ses outils.
+      Operationalise les effets de reactivite politique de
+      Chiapello & Gilbert (2016).
+
+  ecriture_contestee_uri:
+    type: "URI/null"
+    description: >
+      URI de l'ecriture contestee par cette contre-inscription.
+      A renseigner quand type_deliberation = CONTRE_INSCRIPTION.
+      Permet de tracer le palimpseste du registre.

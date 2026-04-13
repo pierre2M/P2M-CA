@@ -1,0 +1,109 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Définition de la couche C-SOLIDITE
+# Durabilité, réversibilité et seuils de non-retour
+#
+# C-SOLIDITE encode la graduation de la durabilité et de la réversibilité
+# des interactions. Elle prolonge la notion callonienne de boîte noire
+# et ajoute la capacité de tracer les seuils de non-retour et les
+# irréversibilités entropiques.
+#
+# Note sur R1 : pour la valeur IRREVERSIBLE, la règle de symétrie R1
+# peut être suspendue par convention — une extinction d'espèce n'a pas
+# d'écriture miroir possible.
+#
+# Usage : python3 create_layer.py c_solidite_layer.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+slug: "C-SOLIDITE"
+label: "Durabilité et réversibilité"
+description: >
+  Encode la graduation de la solidite et de la reversibilite des
+  interactions. Prolonge la notion callonienne de boite noire (Callon,
+  1986) et ajoute la capacite de tracer les seuils de non-retour et
+  les irreversibilites entropiques pertinentes pour la comptabilite
+  ecologisee (Callon et al., 2025). Pour la valeur IRREVERSIBLE,
+  la regle R1 peut etre suspendue par convention.
+
+auteur_slug: null
+
+couches_parentes: []
+
+champs_definis:
+
+  solidite_enonce:
+    type: "enum"
+    valeurs:
+      - CONTROVERSE
+      - PROVISOIRE
+      - STABILISE
+      - BOITE_NOIRE
+      - IRREVERSIBLE
+    description: >
+      Graduation de la solidite de l'enonce encode dans l'ecriture.
+      CONTROVERSE  : l'enonce est activement dispute. Des contre-
+                     inscriptions existent ou sont attendues.
+      PROVISOIRE   : l'enonce est accepte localement mais non clos.
+                     Resultats preliminaires, consensus fragile.
+      STABILISE    : l'enonce est largement accepte mais reste
+                     contestable. Consensus scientifique etabli.
+      BOITE_NOIRE  : l'enonce est traite comme un fait stabilise
+                     dans le reseau. Plus remis en question en pratique.
+      IRREVERSIBLE : l'evenement ne peut plus etre annule.
+                     Extinction d'espece, degradation definitive d'un
+                     sol, effondrement d'un ecosysteme. R1 suspendue.
+
+  seuil_non_retour:
+    type: "booleen"
+    description: >
+      Vrai si le seuil d'irreversibilite ecologique est atteint
+      ou depasse dans cette interaction. Declenche une alerte
+      dans le registre et impose un archivage obligatoire de
+      l'etat anterieur via archive_etat_anterieur_uri.
+
+  r1_suspendue:
+    type: "booleen"
+    description: >
+      Vrai si la regle de symetrie R1 est suspendue pour cette
+      ecriture, par convention dans C-SOLIDITE. Applicable
+      uniquement quand solidite_enonce = IRREVERSIBLE.
+      Doit etre documente avec une justification dans
+      motif_suspension_r1.
+
+  motif_suspension_r1:
+    type: "markdown/null"
+    description: >
+      Justification de la suspension de R1 pour cette ecriture.
+      Obligatoire si r1_suspendue = true. Documente la nature
+      de l'irreversibilite et pourquoi aucune ecriture miroir
+      n'est possible.
+
+  indicateur_vitalite:
+    type: "markdown"
+    description: >
+      Indicateur de vitalite de l'asset-actif a ce stade du
+      cycle de vie. Encode les resultats des valuemeters C-SOG
+      sous forme synthetique. Permet de suivre la degradation
+      ou la restauration de l'agentivite de l'acteur.
+
+  archive_etat_anterieur_uri:
+    type: "URI/null"
+    description: >
+      Reference a l'ecriture archivant l'etat anterieur de
+      l'asset-actif avant la degradation ou l'irreversibilite.
+      Obligatoire quand seuil_non_retour = true.
+      Permet de detecter les degradations masquees par des
+      ecritures de restauration fictives (anti-greenwashing).
+
+  date_evenement:
+    type: "datetime/null"
+    description: >
+      Date de l'evenement ayant produit la solidite ou
+      l'irreversibilite enregistree. Peut differ de la date
+      de l'ecriture si l'evenement est documente posterieurement.
+
+  source_evaluation:
+    type: "markdown/null"
+    description: >
+      Source de l'evaluation de la solidite : organisme,
+      protocole scientifique, consensus deliberatif.
+      Complementaire a convention_de_quantification (C-SOG).

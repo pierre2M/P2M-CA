@@ -1,0 +1,47 @@
+# exemple : restauration-zh-briere-2026-04.yaml
+slug: "restauration-zh-briere-2026-04"
+couches:
+  - "C-SOG/biophysique"
+  - "C-SOG/care"
+  - "C-GOUVERNANCE"
+  - "C-CONSENTEMENT"
+
+ecritures:
+  - acteur_slug: "zone-humide-de-briere-2"
+    sens: "DEBIT"
+    couche: "C-SOG/biophysique"
+    contenu: |
+      Restauration de 14 ha en prairie humide.
+      Indice biodiversité : +0,8 points SEEA-EA.
+      [convention_de_quantification : SEEA-EA, hors insectes]
+
+  - acteur_slug: "zone-humide-de-briere-2"
+    sens: "CREDIT"
+    couche: "C-SOG/biophysique"
+    contenu: |
+      Séquestration de 180 tCO2eq supplémentaires sur 5 ans.
+      Régulation hydrique améliorée.
+
+  - acteur_slug: "association-naturaliste-loire-2"
+    sens: "DEBIT"
+    couche: "C-SOG/care"
+    contenu: |
+      L'association mobilise 400h de travail bénévole
+      et 12 000 EUR de financement européen.
+      [registre_valuation : CARE]
+
+  - acteur_slug: "association-naturaliste-loire-2"
+    sens: "CREDIT"
+    couche: "C-CONSENTEMENT"
+    contenu: |
+      Validation conjointe requise avec le Conservatoire
+      d'espaces naturels et l'Agence de l'eau.
+      [type_deliberation : CO_VALIDATION]
+
+validations_requises:
+  - acteur_slug: "syndicat-mixte-du-bassin-versant-2"
+    type: "HUMAIN"
+    couche: "C-GOUVERNANCE"
+  - acteur_slug: "association-naturaliste-loire-2"
+    type: "CO_VALIDATION"
+    couche: "C-CONSENTEMENT"
